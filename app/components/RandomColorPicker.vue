@@ -18,9 +18,12 @@
 </template>
 
 <script>
+    // import the second component so that we can create a navigation button.
     import DrawingScreen from './DrawingScreen';
+
     export default {
         computed: {
+            // Create an HTML hex color code from the red, green, blue properties
             textColor: function() {
                 return "#" +
                     this.red.toString(16).padStart(2, '0') +
@@ -29,12 +32,12 @@
             }
         },
         methods: {
-            onButtonTap() {
-                console.log("Button was pressed");
-            },
+            // Create a random number
             getRandomInt(max) {
                 return Math.floor(Math.random() * Math.floor(max));
             },
+            // When the user presses the button get a random integer between 0-255
+            // For each of the three color properties
             onColorButton() {
                 this.red = this.getRandomInt(255);
                 this.blue = this.getRandomInt(255);

@@ -21,6 +21,7 @@
 </template>
 
 <script>
+    // Initialize External Libraries
     const ColorPicker = require('nativescript-color-picker').ColorPicker;
     const imageSourceModule = require("tns-core-modules/image-source");
     const fileSystemModule = require("tns-core-modules/file-system");
@@ -36,12 +37,15 @@
             };
         },
         methods: {
+            // Function to convert an array [red, green, blue] to an HTML hex code
             colorTranslate(colors) {
                 return "#" +
                     parseInt(colors[0]).toString(16).padStart(2, '0') +
                     parseInt(colors[1]).toString(16).padStart(2, '0') +
                     parseInt(colors[2]).toString(16).padStart(2, '0');
             },
+            // Call the Color Picker Library passing in the current selected color
+            // When the user selects a new color set it on the instance
             showPicker() {
               let vm = this;
               vm.cpicker.show(vm.selectedColor, 'RGB').then(function (result) {
@@ -50,6 +54,8 @@
                   console.log(err);
               });
             },
+            // When the user clicks save, save the image to the filesystem temporarily
+            // Then present the user with sharing options to export the file.
             saveDrawing() {
                 var pad = this.$refs.drawingPad.nativeView;
                 pad.getDrawing().then((a) => {
@@ -66,7 +72,8 @@
                     console.log(err);
                 });
             },
-            clearMyDrawing(args) {
+            // Call the clear on the pad.
+            clearMyDrawing() {
                 var pad = this.$refs.drawingPad.nativeView;
                 pad.clearDrawing();
             }
